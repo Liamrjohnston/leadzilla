@@ -47,6 +47,12 @@ class Extraction(unittest.TestCase):
         self.assertEqual([l["domain"] for l in external_sites(self.p)], ["othersite.com"])
         self.assertEqual(self.p["socials"]["instagram"], "https://www.instagram.com/acme")
 
+    def test_linkedin_admin_and_share_links_cleaned(self):
+        p = extract('<a href="https://www.linkedin.com/company/1312569/admin/">x</a>', "https://a.ca")
+        self.assertEqual(p["socials"]["linkedin"], "https://www.linkedin.com/company/1312569/")
+        p = extract('<a href="https://www.linkedin.com/shareArticle?url=x">s</a>', "https://a.ca")
+        self.assertNotIn("linkedin", p["socials"])
+
     def test_bad_html_does_not_crash(self):
         self.assertEqual(extract("", "https://x.ca")["emails"], [])
 

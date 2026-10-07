@@ -143,7 +143,13 @@ def extract(page_html: str, url: str) -> dict:
         d = domain_of(href)
         for key, name in SOCIAL.items():
             if d.endswith(key) and name not in socials:
-                socials[name] = href.split("?")[0]
+                clean = href.split("?")[0].split("#")[0]
+                if name == "linkedin":
+                    m = re.search(r"linkedin\.com/(company|in|school)/([^/]+)", clean)
+                    if not m:
+                        continue  # share buttons, feeds, admin panels: not a profile
+                    clean = f"https://www.linkedin.com/{m.group(1)}/{m.group(2)}/"
+                socials[name] = clean
         anchor = " ".join(a.text_content().split())[:80]
         key = href.split("#")[0]
         if key in seen:
