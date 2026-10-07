@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.db
+runs/
+*.csv
+*.xlsx
+.DS_Store

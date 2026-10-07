@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "leadzilla"
+version = "0.1.0"
+description = "Find and qualify business leads for a fraction of a cent: Scrapling fetches, code extracts, Jev judges."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+  "scrapling[fetchers]==0.4.15",
+  "ddgs>=9",
+  "dnspython>=2.4",
+  "openpyxl>=3.1",
+  "certifi",
+]
+
+[project.scripts]
+leadzilla = "leadzilla.cli:main"
+
+[tool.setuptools]
+packages = ["leadzilla"]
