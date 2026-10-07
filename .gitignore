@@ -5,3 +5,5 @@ runs/
 *.csv
 *.xlsx
 .DS_Store
+build/
+*.egg-info/
